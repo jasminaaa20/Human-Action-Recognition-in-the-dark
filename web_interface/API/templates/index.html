@@ -58,9 +58,14 @@
         </div>
       </form>
 
-      <div id="video-container" style="display: none">
+      <div id="video-container">
         <h2>Processed Video</h2>
-        <video id="processed-video" controls autoplay width="640" height="360">
+        <video id="processed-video" controls autoplay>
+          <source
+            src="../static/predicted/predicted_Test.mp4"
+            type="video/mp4"
+          />
+          <!-- Fallback message for browsers that do not support the video tag -->
           Your browser does not support the video tag.
         </video>
       </div>
@@ -76,7 +81,7 @@
 
         if (!response.ok) {
           const errorMessage = await response.text();
-          alert("Error Occurred");
+          alert(errorMessage);
           return;
         }
 
@@ -84,10 +89,8 @@
         const videoContainer = document.getElementById("video-container");
         const processedVideo = document.getElementById("processed-video");
 
-        video = await response.blob();
-        console.log(video);
-        processedVideo.src = URL.createObjectURL(video);
-        console.log(processedVideo);
+        res = await response.ok();
+        console.log(res);
         videoContainer.style.display = "block";
       }
     </script>

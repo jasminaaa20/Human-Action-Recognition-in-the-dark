@@ -38,7 +38,7 @@ The model is compiled using categorical cross-entropy loss, optimized with Adam 
 ## Model Evaluation
 
 The model is evaluated using the test dataset, and a confusion matrix is generated to analyze its performance:
-
+<!---
 |       | Walking | Pushing | Turning | ... | Picking |
 |-------|---------|---------|---------|-----|---------|
 | Walking | xx  | xx      | xx      | ... | xx      |
@@ -47,7 +47,7 @@ The model is evaluated using the test dataset, and a confusion matrix is generat
 | Picking | xx  | xx      | xx      | ... | xx      |
 
 _Note: Replace the "xx" with actual confusion matrix values._
-
+--->
 ## Results
 
 The loss and accuracy curves of the model during training can be seen below:

@@ -18,3 +18,4 @@ web_interface/API/static/faces/**
 web_interface/API/static/predicted/**
 web_interface/API/static/uploads/**
 
+web_interface/API/__pycache__/

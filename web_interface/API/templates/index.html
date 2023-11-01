@@ -59,12 +59,8 @@
       </form>
 
       <div id="video-container">
-        <h2>Processed Video</h2>
-        <video id="processed-video" controls autoplay>
-          <source
-            src="../static/predicted/predicted_Test.mp4"
-            type="video/mp4"
-          />
+        <h1>Video Streaming Demonstration</h1>
+    <img src="{{ url_for('stream') }}">
           <!-- Fallback message for browsers that do not support the video tag -->
           Your browser does not support the video tag.
         </video>
@@ -80,10 +76,7 @@
         });
 
         if (!response.ok) {
-          const errorMessage = await response.text();
-          alert(errorMessage);
-          return;
-        }
+          const errorMessage = 
 
         // Show the processed video
         const videoContainer = document.getElementById("video-container");

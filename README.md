@@ -1,56 +1,78 @@
-# Human Action Recognition in Challenging Lighting Conditions
+# Action Recognition in the Dark using ARID Dataset
 
-This project is developed as part of the course CS3501 - Data Science & Engineering Project and is focused on detecting human actions in challenging lighting conditions.
+The Action Recognition in the Dark (ARID) dataset focuses on human action recognition in challenging lighting conditions, such as low-light and darkness. This project employs ARID v1.5 to train a model to detect human actions under these lighting conditions.
 
-## Table of Contents
+## Dataset Overview
 
-- [Introduction](#introduction)
-- [Frontend](#frontend)
-- [Backend](#backend)
-- [Installation](#installation)
-- [Important Note](#important-note)
+The ARID dataset consists of video clips featuring 11 distinct human actions performed in various scenes, both indoor and outdoor, under varying lighting conditions. More details about the ARID v1.5 dataset can be found [here](https://xuyu0010.github.io/arid.html).
 
-## Introduction
+## Preprocessing Steps
 
-The Human Action Recognition in Challenging Lighting Conditions project is designed to address the detection of human actions when faced with difficult lighting conditions. The project uses a combination of frontend and backend technologies to achieve its goals.
+### 1. Frame Extraction from Videos
 
-## Client Side
+From each video, 20 frames are extracted to form a list of frames per video, serving as the primary dataset elements.
 
-The frontend of the project is built using Next.js, a popular JavaScript framework. To run the frontend, follow these steps:
+<!---
+![Frame Extraction](path/to/frame_extraction_image.jpg)
+--->
 
-1. Navigate to the `web_interface/frontend` directory.
-2. Run `npm install` to install all frontend dependencies.
-3. Start the development server with `npm run dev`.
+### 3. Histogram Equalization
 
-## Server Side
+To improve visibility, reduce noise, and standardize frames, histogram equalization is applied to each frame.
 
-The backend of the project is powered by Flask, a Python web framework. To run the backend, follow these steps:
+<!---
+![Histogram Equalization](path/to/histogram_equalization_image.jpg)
+--->
 
-1. Create a virtual environment to isolate dependencies. You can use the following command to create a virtual environment:
+### 4. Key-point Detection using YOLOv8-pose
 
-   ```shell
-   python -m venv venv
-   ```
+Key-point information is extracted from each frame using the YOLOv8-pose key-point detection model.
 
-2. Activate the virtual environment. Use the appropriate command for your operating system:
+<!---
+![Key-point Detection](path/to/keypoint_detection_image.jpg)
+--->
 
-   - On Windows:
+## Model Architecture
 
-     ```shell
-     venv\Scripts\activate
-     ```
+The model architecture utilizes a Long-term Recurrent Convolutional Networks (LRCN) approach. The detailed code for the architecture can be found above.
 
-3. Install the required Python dependencies using the `requirements.txt` file:
+<!---
+![Model Architecture](path/to/model_architecture_image.jpg)
+--->
 
-   ```shell
-   pip install -r requirements.txt
+## Model Compilation and Training
 
-   ```
+The model is compiled using categorical cross-entropy loss, optimized with Adam optimizer. The training history is saved for plotting and evaluation purposes.
 
-4. Navigate to the `web_interface/API` directory.
+## Model Evaluation
 
-5. Run the Flask application with `python app.py`.
+The model is evaluated using the test dataset, and a confusion matrix is generated to analyze its performance:
 
-### Important Note
+<!---
+|       | Walking | Pushing | Turning | ... | Picking |
+|-------|---------|---------|---------|-----|---------|
+| Walking | xx  | xx      | xx      | ... | xx      |
+| Pushing | xx  | xx      | xx      | ... | xx      |
+| ...     | ...  | ...     | ...     | ... | ...     |
+| Picking | xx  | xx      | xx      | ... | xx      |
 
-If you encounter issues with the `dlib` package when installing dependencies, please modify the `requirements.txt` file. You may need to specify the correct path to the `dlib` package. An example line from the `requirements.txt` file might look like this:
+_Note: Replace the "xx" with actual confusion matrix values._
+--->
+
+## Results
+
+The loss and accuracy curves of the model during training can be seen below:
+
+### Loss Curve
+
+![Loss Curve](path/to/loss_curve_image.jpg)
+
+### Accuracy Curve
+
+![Accuracy Curve](path/to/accuracy_curve_image.jpg)
+
+---
+
+## Conclusion
+
+This project has successfully built a model to detect and classify human actions in challenging lighting conditions using the ARID v1.5 dataset. The LRCN approach combined with strategic preprocessing steps has allowed for improved accuracy and performance.

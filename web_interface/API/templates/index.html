@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Video Upload Form</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      h1 {
+        text-align: center;
+      }
+      form {
+        text-align: center;
+      }
+      .upload-btn-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+      }
+      .btn {
+        border: 2px solid gray;
+        color: gray;
+        background-color: white;
+        padding: 8px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .upload-btn-wrapper input[type="file"] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Upload and Process Video</h1>
+      <form id="upload-form" method="post" enctype="multipart/form-data">
+        <div class="upload-btn-wrapper">
+          <button id="upload-btn" class="btn" type="button">
+            Upload and Process
+          </button>
+          <input
+            type="file"
+            name="file"
+            accept="video/*"
+            onchange="uploadAndProcess(event)"
+          />
+        </div>
+      </form>
+
+      <div id="video-container">
+        <h1>Video Streaming Demonstration</h1>
+    <img src="{{ url_for('stream') }}">
+          <!-- Fallback message for browsers that do not support the video tag -->
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <script>
+      async function uploadAndProcess(event) {
+        const formData = new FormData(event.target.closest("form"));
+        const response = await fetch("/predict", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          const errorMessage = 
+
+        // Show the processed video
+        const videoContainer = document.getElementById("video-container");
+        const processedVideo = document.getElementById("processed-video");
+
+        res = await response.ok();
+        console.log(res);
+        videoContainer.style.display = "block";
+      }
+    </script>
+  </body>
+</html>

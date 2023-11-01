@@ -16,7 +16,6 @@ export default function Home() {
   const [processing, setProcessing] = useState(false);
 
   const handleVideoUpload = async (event) => {
-    processing;
     const file = event.target.files[0];
 
     setSelectedVideo(file);
@@ -27,23 +26,27 @@ export default function Home() {
 
       // Send the video to the backend for processing
       console.log("Sending video to backend for processing...");
-      const response = await fetch(serverURL + "/predict", {
-        method: "POST",
-        body: formData,
-      });
+      try {
+        const response = await fetch(serverURL + "/predict", {
+          method: "POST",
+          body: formData,
+        });
 
-      if (!response.ok) {
-        console.error("Error processing video.");
+        if (!response.ok) {
+          console.error("Error processing video.");
+          return;
+        }
+        const data = await response.json();
+        const videoURL = data.video_url;
+        setVideoURL(videoURL);
+        console.log("Video URL: ", videoURL);
+        setSelectedVideo(null);
+      } catch (error) {
+        console.error("An error occurred:", error);
+      } finally {
+        setProcessing(false);
       }
-      const data = await response.json();
-      const videoURL = data.video_url;
-      setVideoURL(videoURL);
-      console.log("Video URL: ", videoURL);
-      setSelectedVideo(null);
-    } else {
-      console.error("No video selected.");
     }
-    setProcessing(false);
   };
 
   const handleWebCam = async (isOpen) => {
@@ -98,7 +101,7 @@ export default function Home() {
             <input
               type="file"
               accept="video/*"
-              onChange={() => {
+              onChange={(event) => {
                 handleWebCam(false);
                 handleVideoUpload(event);
                 setProcessing(true);

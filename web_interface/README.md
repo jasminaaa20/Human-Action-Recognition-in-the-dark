@@ -54,3 +54,5 @@ The backend of the project is powered by Flask, a Python web framework. To run t
 ### Important Note
 
 If you encounter issues with the `dlib` package when installing dependencies, please modify the `requirements.txt` file. You may need to specify the correct path to the `dlib` package. An example line from the `requirements.txt` file might look like this:
+
+`dlib @ file:///F://Project%20Files/dlib-19.24.1-cp311-cp311-win_amd64.whl#sha256=6f1a5ee167975d7952b28e0ce4495f1d9a77644761cf5720fb66d7c6188ae496`

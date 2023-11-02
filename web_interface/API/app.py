@@ -35,16 +35,18 @@ def streaming():
         if counter % skip_frames == 0:
             Video_Processor.process_frame(frame)
 
-            if counter % ((skip_frames) ** 2) == 0:
+            if counter % ((10) ** 2) == 0:
                 face_recognition.identify(frame)
 
-        Video_Processor.write_frame(frame)
+        frame  = Video_Processor.write_frame(frame)
+        
         flag, encodedImage = cv2.imencode('.jpg', frame)
         counter += 1
         if not flag:
             continue
         yield (b'--frame\r\n' + b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
 
+    print("Everything must end")
     Video_Processor.release_all()
     Video_Processor.convert_to_mp4()
 
@@ -79,7 +81,6 @@ def predict():
 
             if counter % skip_frames == 0:
                 Video_Processor.process_frame(frame)
-                Video_Processor.update_luminance(frame)
 
                 if counter % ((skip_frames) ** 2) == 0:
                     face_recognition.identify(frame, is_Stream=False)

@@ -16,6 +16,7 @@ export default function Home() {
   const [processing, setProcessing] = useState(false);
 
   const handleVideoUpload = async (event) => {
+    console.log("hi");
     const file = event.target.files[0];
 
     setSelectedVideo(file);
@@ -102,6 +103,7 @@ export default function Home() {
               type="file"
               accept="video/*"
               onChange={(event) => {
+                console.log("file Uploaded");
                 handleWebCam(false);
                 handleVideoUpload(event);
                 setProcessing(true);

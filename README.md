@@ -59,20 +59,6 @@ The model is evaluated using the test dataset, and a confusion matrix is generat
 _Note: Replace the "xx" with actual confusion matrix values._
 --->
 
-## Results
-
-The loss and accuracy curves of the model during training can be seen below:
-
-### Loss Curve
-
-![Loss Curve](path/to/loss_curve_image.jpg)
-
-### Accuracy Curve
-
-![Accuracy Curve](path/to/accuracy_curve_image.jpg)
-
----
-
 ## Conclusion
 
 This project has successfully built a model to detect and classify human actions in challenging lighting conditions using the ARID v1.5 dataset. The LRCN approach combined with strategic preprocessing steps has allowed for improved accuracy and performance.
